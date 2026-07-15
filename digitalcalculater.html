@@ -1,193 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Calculater</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Calculator</title>
+  <style>
+    /* Parent container */
+    #parent{
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: rgb(211, 197, 197);
+      margin: 0;
+    }
+
+    h1{
+      color: rgb(242, 10, 10);
+      margin-top: 20px;
+    }
+
+    h1 a{
+      color: rgb(22, 231, 85);        
+      text-decoration: none;
+      transition: 0.3s; 
+    }
+
+    h1 a:hover{ 
+      color: rgb(28, 31, 30);       
+      text-decoration: underline; 
+      font-size: 2vw;
+    }
+
+    /* Calculator box smaller */
+    #calculater{
+      height: 60vh;   
+      width: 25vw;    
+      border: 2px solid white;
+      border-radius: 20px;
+      box-shadow: 8px 8px 5px rgb(72, 70, 70);
+      padding: 2vh;
+      background-color: #fff;
+    }
+
+    #calculater input{
+      width: 100%;        
+      height: 20%;        
+      border-radius: 10px;
+      padding: 5px 10px;
+      font-size: 2vw;    
+      outline: none;
+      text-align: end;
+      color: rgb(217, 17, 17);
+      box-sizing: border-box;
+    }
+
+    #btn-group{
+      height: 75%;
+      width: 100%;
+      margin-top: 2vh;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      grid-gap: 8px;
+    }
+
+    button{
+      height: 8vh;        
+      width: 100%;        
+      font-size: 1.5vw;   
+      border-radius: 10px;
+    }
+
+    button:hover{
+      background-color: rgb(172, 216, 247);
+    }
+
+    #equal{
+      grid-column: span 2; 
+      background-color: rgb(6, 160, 6);
+      color: white;
+    }
+
+    #equal:hover {
+      background-color: rgb(9, 231, 76);
+    }
+
+    .op-btn{
+      background-color: rgb(189, 124, 2);
+    }
+
+    .op-btn:hover {
+      background-color: rgb(240, 158, 5);
+    }
+
+    #b-btn{
+      background-color: rgb(150, 87, 5); 
+      color: white;
+    }
+
+    #b-btn:hover{
+      background-color: rgb(232, 135, 8); 
+    }
+
+    #ac-btn{
+      background-color: rgb(175, 4, 4); 
+      color: white;
+    }
+
+    #ac-btn:hover{
+      background-color: rgb(237, 5, 5);
+    }
+  </style>
 </head>
-<style>
-#parent{
-    height: 100vh;
-    width: 100vw;
-    background-color: rgb(211, 197, 197);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-
-}
-
-h1{
-    color: rgb(242, 10, 10);
-    margin-top: 30px;
-
-    
-}
-
-h1 a{
-
-     color: rgb(22, 231, 85);        
-    text-decoration: none;
-    transition: 0.3s; 
-}
-
-h1 a:hover{ 
-    color: rgb(28, 31, 30);       
-    text-decoration: underline; 
-    font-size: 28px;
-}
-#calculater{
-    height:650px;
-    width:400px;
-    border: 2px solid white;
-    border-radius: 30px;
-    box-shadow: 15px 15px 5px rgb(72, 70, 70);
-    padding: 20px;
-
-
-}
-#calculater  input{
-    width: 90%;
-    height: 80px;
-    border-radius: 20px;
-    padding: 5px 20px;
-    font-size:40px;
-    outline: none;
-    text-align: end;
-    color: white;
-}
-
-
-#btn-group{
-    height: 500px;
-    width: 100%;
-    /* background-color: white; */
-    margin-top: 20px;
-    border-radius:15px;
-    /* border:  2px solid green; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
- button{
-    height: 80px;
-    width: 90px;
-    border-radius: 20px;
-    font-size: 50px;
-}
-
-button:hover{
-    background-color: rgb(172, 216, 247);
-}
-
-#equal{
-width: 190px;
-background-color: rgb(6, 160, 6);
-color: white;
-}
-
-
-#equal:hover {
-    background-color: rgb(9, 231, 76);
-}
-
-.op-btn{
-
-background-color: rgb(189, 124, 2);
-
-}
-
-.op-btn:hover {
-    background-color: rgb(240, 158, 5);
-}
-
-
-#b-btn{
-    background-color: rgb(150, 87, 5); 
-    color: white;
-}
-
-#b-btn:hover{
-    background-color: rgb(232, 135, 8); 
-}
-
-#ac-btn{
-    background-color: rgb(175, 4, 4); 
-    color: white;
-}
-
-
-#ac-btn:hover{
-    background-color: rgb(237, 5, 5);
-}
-
-</style>
 <body>
-    <div id="parent">
-        <div id="calculater">
-            <input  id="display"  disabled type="text"  placeholder="0">
-                <div id="btn-group">
-                   <button id="ac-btn" onclick="erase()">AC</button>
-                   <button id="b-btn" onclick="backspace()">B</button>
-                   <button class="op-btn" onclick="percentage()" >%</button>
-                   <button class="op-btn" onclick="userInput('+')">+</button>
-                   <button onclick="userInput('1')">1</button>
-                   <button onclick="userInput('2')">2</button>
-                   <button onclick="userInput('3')">3</button>
-                   <button class="op-btn" onclick="userInput('-')">-</button>
-                   <button onclick="userInput('4')">4</button>
-                   <button onclick="userInput('5')">5</button>
-                   <button onclick="userInput('6')">6</button>
-                   <button class="op-btn" onclick="userInput('*')">x</button>
-                   <button onclick="userInput('7')">7</button>
-                   <button onclick="userInput('8')">8</button>
-                   <button onclick="userInput('9')">9</button>
-                   <button class="op-btn" onclick="userInput('/')">/</button>
-                   <button onclick="userInput('.')">.</button>
-                   <button onclick="userInput('0')">0</button>
-                   <button id="equal" onclick="calculate()">=</button>
-                   
-        </div>
+  <div id="parent">
+    <div id="calculater">
+      <input id="display" disabled type="text" placeholder="0">
+      <div id="btn-group">
+        <button id="ac-btn" onclick="erase()">AC</button>
+        <button id="b-btn" onclick="backspace()">B</button>
+        <button class="op-btn" onclick="percentage()">%</button>
+        <button class="op-btn" onclick="userInput('+')">+</button>
+        <button onclick="userInput('1')">1</button>
+        <button onclick="userInput('2')">2</button>
+        <button onclick="userInput('3')">3</button>
+        <button class="op-btn" onclick="userInput('-')">-</button>
+        <button onclick="userInput('4')">4</button>
+        <button onclick="userInput('5')">5</button>
+        <button onclick="userInput('6')">6</button>
+        <button class="op-btn" onclick="userInput('*')">x</button>
+        <button onclick="userInput('7')">7</button>
+        <button onclick="userInput('8')">8</button>
+        <button onclick="userInput('9')">9</button>
+        <button class="op-btn" onclick="userInput('/')">/</button>
+        <button onclick="userInput('.')">.</button>
+        <button onclick="userInput('0')">0</button>
+        <button id="equal" onclick="calculate()">=</button>
+      </div>
     </div>
-     <h1> Created by <a href="https://www.linkedin.com/in/alok-prajapati-21404a2a7?utm_source=share_via&utm_content=profile&utm_medium=member_android">Alok Prajapati</a></h1>
+    <h1>Created by <a href="https://www.linkedin.com/in/alok-prajapati-21404a2a7?utm_source=share_via&utm_content=profile&utm_medium=member_android">Alok Prajapati</a></h1>
+  </div>
 
-     <script>
-            const audio =new Audio('music.wav');
+  <script>
+    const audio = new Audio('music.wav');
 
-        function userInput(input){
-            display.value +=input
-             audio.play();
-        }
+    function userInput(input){
+      display.value += input;
+      audio.play();
+    }
 
- function erase(){
-    display.value='';
-    audio.play();
- }
+    function erase(){
+      display.value = '';
+      audio.play();
+    }
 
-function backspace(){
-    display.value=display.value.slice(0,-1);
-    audio.play();
-}
+    function backspace(){
+      display.value = display.value.slice(0,-1);
+      audio.play();
+    }
 
+    function calculate(){
+      display.value = eval(display.value);
+      audio.play();
+    }
 
-function calculate(){
-    display.value= eval(display.value);
-    audio.play();
-
-}
-
-function percentage(){
-    if(display.value !== ''){
+    function percentage(){
+      if(display.value !== ''){
         display.value = parseFloat(display.value) / 100;
         audio.play();
+      }
     }
-}
-
-
-     </script>
- </div>
+  </script>
 </body>
 </html>
